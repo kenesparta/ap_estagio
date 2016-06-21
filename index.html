@@ -28,6 +28,18 @@
             color: #8c8c8c;
             background-color: #8c8c8c;
         }
+
+        div#carga_horaria text {
+            font-size: 13px;
+            font-weight: bolder;
+            color: black;
+        }
+
+        div#semestre text {
+            font-size: 13px;
+            font-weight: bolder;
+            color: black;
+        }
     </style>
 </head>
 <body>
@@ -46,27 +58,24 @@
                 <small> nek.112358@gmail.com</small>
             </p>
         </section>
-        <section>
-            <section>
-                <h2>Melhores cursos de Engenraria da Computação<br>(MEC - 2014)</h2>
-                <small style="color: #67b168">
-                    <i>Fonte: </i>http://exame.abril.com.br/carreira/noticias/os-melhores-cursos-superiores-de-computacao-do-brasil
-                </small>
-            </section>
-            <section>
-                <h2>UNIVERSIDADE TECNOLÓGICA FEDERAL DO PARANÁ (UTFPR)</h2>
-                <p style="margin-top: -15px"> <!-- CPC = Conceito preliminar de curso -->
-                    <strong style="font-size: 20px; padding-right: 2.5em;color: #1b91ff">Curitiva-PR</strong> <strong style="font-size: 20px;color: red" >CPC: 4,237</strong>
-                </p>
+        <section id="secao_univ">
 
-            </section>
+        </section>
+        <section>
+            <div id="carga_horaria" style="width: 1024px; height: 600px;"></div>
+        </section>
+        <section>
+            <div id="semestre" style="width: 1024px; height: 600px;"></div>
+        </section>
+        <section>
+            <h1>Conclusão</h1>
         </section>
     </div>
 </div>
 
 <script src="lib/js/head.min.js"></script>
 <script src="js/reveal.js"></script>
-
+<script src="js/dados.js"></script>
 <script>
     // More info https://github.com/hakimel/reveal.js#configuration
     Reveal.initialize({
@@ -84,6 +93,27 @@
             }
         ]
     });
+</script>
+<script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+<script type="text/javascript" src="js/cargaHorariaGraficos.js"></script>
+<script type="text/javascript" src="js/semestreGraficos.js"></script>
+<script type="text/javascript">
+    var secaoUniv = document.getElementById('secao_univ');
+    var slides = "<section><h2>Melhores cursos de Engenraria da Computação<br>(MEC - 2014)</h2><small style='color: #67b168'>" +
+            "<i>Fonte: </i>http://exame.abril.com.br/carreira/noticias/os-melhores-cursos-superiores-de-computacao-do-brasil</small>" +
+            "</section>";
+    for (var d in dados_universidades) {
+        slides += "<section>" + "<h2>" + dados_universidades[d].nome + "</h2>" +
+                "<p style='margin-top: -15px'> <strong style='font-size: 20px; padding-right: 2.5em; color: #1b91ff'> " +
+                dados_universidades[d].municipio + '-' + dados_universidades[d].uf + "</strong>" +
+                "<strong style='font-size: 20px;color: red'>" + "CPC : " + dados_universidades[d].cpc + "</strong>" +
+                "</p>" +
+                "<small style='color: #67b168; width: 600px'>" +
+                "<i>Fonte: </i>" + dados_universidades[d].site + "</small>" + "</section>";
+    }
+    secaoUniv.innerHTML = slides;
+    //secaoUniv.appendChild("hello");
+
 </script>
 </body>
 </html>
